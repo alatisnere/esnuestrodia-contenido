@@ -7,19 +7,32 @@ terminar. El banco nunca se vacía.
 
 ---
 
+## EN COLA — ya armados, esperando su turno
+
+| Archivo | Tipo | Tema |
+|---|---|---|
+| 010 | valor | Los colores que se están viendo este año |
+| 011 | promoción | Las mismas preguntas por WhatsApp |
+| 012 | valor | Traje de novio a la medida: los tiempos |
+| 013 | promoción | El bloque de hotel que nadie usó |
+| 014 | valor | Dos pares de zapatos |
+| 015 | promoción | La galería sigue viva después de la boda |
+
+Ojo: estos ya no están en las listas de pendientes de abajo. Cuando GitHub los
+publique, pasan solos a «usados» y salen de la cola.
+
+---
+
 ## VALOR — pendientes
 
 Consejo práctico de organización de boda. No mencionan la página ni venden nada.
 
-1. Traje a la medida: pedir tela nacional para que no se retrase
 2. Cuánto tarda cada trámite del civil y cuándo hay que empezarlo
-3. Zapatos: por qué se compran dos pares y a qué hora se cambian
 4. Menú: cuántos tiempos aguantan de verdad los invitados
 5. Música: a qué hora conviene pasar de banda a DJ
 6. Maquillaje de prueba: cuándo hacerlo y qué llevar
 7. Boda de día contra boda de noche: qué cambia en el presupuesto
 8. El brindis: cuántos discursos antes de que la gente se aburra
-9. Colores de temporada para acentos y centros de mesa *(verificar el dato antes)*
 10. Cómo armar el bloque de hotel sin quedar mal con nadie
 11. El orden real del día: qué pasa entre el civil y el brindis
 12. Qué preguntar antes de firmar con el salón
@@ -55,10 +68,7 @@ Consejo práctico de organización de boda. No mencionan la página ni venden na
 Estructura fija: portada con contexto de boda → el problema → cómo lo resuelve la
 página → CTA por DM. Nunca precio, nunca país, nunca liga a la web.
 
-1. Los invitados que preguntan lo mismo cincuenta veces
 2. La mesa de regalos que nadie encuentra
-3. El bloque de hotel y los que vienen de fuera
-4. La galería, que sigue viva después de la boda
 5. Una sola dirección en lugar de mil mensajes
 6. El itinerario que cambia y hay que reavisarle a todos
 7. Los que confirman y luego no llegan
@@ -83,14 +93,14 @@ página → CTA por DM. Nunca precio, nunca país, nunca liga a la web.
 
 | Foto | Usos |
 |---|---|
-| arcos-cantera | 1 |
-| calle-colonial | 1 |
+| arcos-cantera | 2 |
+| calle-colonial | 2 |
 | jardin-tropical | 1 |
 | cipreses-hacienda | 1 |
-| civil-terraza | 1 |
-| frentes-buganvilia | 1 |
-| fuente-hacienda | 0 |
-| ramo-manos | 0 |
+| civil-terraza | 2 |
+| frentes-buganvilia | 2 |
+| fuente-hacienda | 1 |
+| ramo-manos | 1 |
 
 Regla: ninguna foto se repite antes de tres publicaciones. Si todas pasan de
 **cuatro usos**, hay que generar fotos nuevas (ver README) o resolver la
