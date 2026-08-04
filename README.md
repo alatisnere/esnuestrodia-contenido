@@ -37,3 +37,26 @@ Lo usa la tarea programada de Cowork para armar y publicar sin intervención man
 4. Si no, elegir tema del banco, investigar con búsqueda web, y generar las
    láminas con `plantillas/plantillas.py`.
 5. Publicar en Instagram y anotar el resultado en `plan/publicadas.md`.
+
+## El banco nunca se vacía
+
+`plan/temas.md` tiene dos listas de pendientes: valor y promoción. La tarea
+programada toma el primero de la lista que le toque, lo publica y lo pasa a
+«usados» con la fecha.
+
+**Regla de reposición:** si al terminar quedan menos de **8 pendientes** en
+cualquiera de las dos listas, la tarea investiga con búsqueda web y agrega al
+menos **10 temas nuevos** a esa lista antes de cerrar. Así nunca hay un día sin
+material.
+
+Fuentes para reponer temas de valor: qué está preguntando la gente en foros y
+blogs de bodas, calendario del año (temporada de lluvias, meses de más bodas,
+fechas de trámites), y las dudas que lleguen por DM o comentarios.
+
+## Cuando se acaben las fotos
+
+`plan/temas.md` lleva la cuenta de usos por foto. Ninguna se repite antes de tres
+publicaciones. Si todas pasan de cuatro usos, hay que generar fotos nuevas con
+Gemini a través del navegador (gemini.google.com), pidiendo formato vertical 4:5,
+parejas y estilos de boda distintos a los que ya hay, y recortando la marca de agua
+de la esquina inferior derecha antes de guardarlas en `fotos/`.
