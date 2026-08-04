@@ -1,0 +1,15 @@
+name: Comprobar la conexión con Instagram
+
+# No publica nada. Sirve para verificar que los secretos están bien puestos.
+on:
+  workflow_dispatch:
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python scripts/comprobar.py
