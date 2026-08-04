@@ -1,0 +1,60 @@
+name: Publicar en Instagram
+
+# Los horarios van en UTC. Ciudad de México es UTC-6 todo el año.
+#   13:30 MX = 19:30 UTC  (publicación de valor)
+#   20:30 MX = 02:30 UTC del día siguiente  (publicación de promoción)
+on:
+  schedule:
+    - cron: "30 19 * * *"
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+    inputs:
+      tipo:
+        description: "Qué publicar ahora"
+        required: true
+        default: valor
+        type: choice
+        options: [valor, promocion]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-instagram
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Decidir qué toca
+        id: cual
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tipo=${{ inputs.tipo }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "30 19 * * *" ]; then
+            echo "tipo=valor" >> "$GITHUB_OUTPUT"
+          else
+            echo "tipo=promocion" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publicar
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python scripts/publicar.py "${{ steps.cual.outputs.tipo }}"
+
+      - name: Anotar en el repositorio
+        if: success()
+        run: |
+          git config user.name  "Publicador Es Nuestro Día"
+          git config user.email "actions@github.com"
+          git add cola publicadas plan/publicadas.md
+          if git diff --cached --quiet; then
+            echo "Nada que anotar."
+          else
+            git commit -m "Publicado: ${{ steps.cual.outputs.tipo }} ($(date -u +%Y-%m-%d))"
+            git push
+          fi
