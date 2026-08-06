@@ -95,13 +95,24 @@ página → CTA por DM. Nunca precio, nunca país, nunca liga a la web.
 |---|---|
 | arcos-cantera | 2 |
 | calle-colonial | 2 |
-| jardin-tropical | 1 |
-| cipreses-hacienda | 1 |
+| cipreses-hacienda | 2 |
 | civil-terraza | 2 |
+| dia-jardin | 1 |
+| fiesta-noche | 1 |
 | frentes-buganvilia | 2 |
-| fuente-hacienda | 1 |
+| fuente-hacienda | 2 |
+| jardin-tropical | 1 |
+| mesa-banquete | 1 |
+| novio-espejo | 1 |
 | ramo-manos | 1 |
 
 Regla: ninguna foto se repite antes de tres publicaciones. Si todas pasan de
 **cuatro usos**, hay que generar fotos nuevas (ver README) o resolver la
 publicación con láminas tipográficas.
+
+Las cuatro últimas se agregaron para romper la monotonía: el banco entero era
+luz dorada de tarde en hacienda. `dia-jardin` mete luz de mediodía y verdes
+frescos, `mesa-banquete` es un detalle sin gente, `novio-espejo` es interior de
+tonos fríos y `fiesta-noche` es la única nocturna. Cuando elijas foto para una
+publicación, fíjate en que no repita la *luz* de la anterior, no solo el
+archivo.
