@@ -8,7 +8,7 @@ todos los tonos son apagados.
 
   colores   arcilla + olivo · grano     · foto cálida    · muestras de color
   preguntas bosque + hueso   · acuarela  · foto fría      · foto partida
-  traje     cacao + arena    · rayado    · foto en gris   · cifra grande
+  traje     cacao + arena    · rayado    · foto apagada   · cifra grande
   hotel     azul + hueso     · puntos    · foto apagada   · banda de foto
   zapatos   vino + salvia    · rayado    · foto cálida    · cifra grande
   galería   salvia + tinta   · acuarela  · foto normal    · frase suelta
@@ -63,7 +63,7 @@ V1 = [
                 "año. Funciona porque los tres son tonos apagados: se llevan bien con "
                 "la madera, con la cantera y con la luz de la tarde.",
                 "arcilla", "grano"),
-    partido("ramo-manos", "Para acentos y centros de mesa",
+    partido("mesa-banquete", "Para acentos y centros de mesa",
             "Cómo se ve<br>junto",
             "Los tres tonos son apagados, así que ninguno pelea con el otro ni con la "
             "luz de la tarde. Es lo que hace que funcione en fotos.",
@@ -88,7 +88,7 @@ V1 = [
                 "base deja que los acentos hagan todo el trabajo, y sale más barato "
                 "que llenar el salón de color.",
                 "hueso", "acuarela"),
-    cierre_color("jardin-tropical", "No te cases<br>con la tendencia.",
+    cierre_color("dia-jardin", "No te cases<br>con la tendencia.",
                  "Una wedding planner lo dijo mejor que nosotros: de cada veinte "
                  "bodas, en una se ve de verdad la paleta que anuncian las revistas. "
                  "Elige el color que te guste a ti y usa la lista como referencia, no "
@@ -154,11 +154,11 @@ Escríbenos «boda» por DM y te mandamos una de ejemplo para que la abras en tu
 # ══════════════════════════════ VALOR 2 · Traje ═════════════════════════
 # Firma: cacao y arena media, rayado, foto en blanco y negro, cifra grande.
 V2 = [
-    portada_color("arcos-cantera", "Traje de novio",
+    portada_color("novio-espejo", "Traje de novio",
                   "¿El novio va<br>a mandar a hacer<br>su traje?",
                   "Empieza antes de lo que crees.",
                   "Desliza · cuánto tarda de verdad",
-                  pos="center 40%", trato="gris"),
+                  pos="center 30%", trato="apagado"),
     dato("4-6", "meses", "Traje de novio",
          "Es el margen que conviene darle antes de la boda. Y la primera pregunta al "
          "sastre no es el precio: es si la tela ya está en el taller o la tiene que "
@@ -183,12 +183,12 @@ V2 = [
                  "Si algo se retrasa, ¿qué plan hay?",
                  "¿Los ajustes de última hora se cobran?"],
                 "cacao", "rayado"),
-    cierre_color("arcos-cantera", "El traje no es<br>lo que se retrasa.<br>Es la tela.",
+    cierre_color("novio-espejo", "El traje no es<br>lo que se retrasa.<br>Es la tela.",
                  "Nadie se acuerda de esto hasta que faltan seis semanas y el sastre "
                  "dice que el corte viene en camino. Preguntarlo el primer día no "
                  "cuesta nada.",
                  "Mándaselo al novio, que se le va a olvidar",
-                 pos="center 20%", trato="gris"),
+                 pos="center 70%", trato="apagado"),
 ]
 
 CAP_V2 = """Si el novio va a mandar a hacer su traje a la medida, empieza entre cuatro y seis meses antes de la boda. Y la primera pregunta al sastre no es el precio: es si la tela ya está en el taller o la tiene que traer.
@@ -301,10 +301,10 @@ Guarda este post para cuando vayas a comprar el vestido, o compártelo con la qu
 # ═════════════════════════ PROMOCIÓN 3 · Galería ════════════════════════
 # Firma: salvia y tinta, acuarela, una frase suelta.
 P3 = [
-    portada_color("frentes-buganvilia", "Después de tu boda",
+    portada_color("fiesta-noche", "Después de tu boda",
                   "Las fotos que<br>tus invitados<br>tomaron",
                   "Están en cien celulares y ahí se quedan.",
-                  "Desliza", pos="center 30%", trato="normal"),
+                  "Desliza", pos="center 55%", trato="normal"),
     cita("Las mejores fotos de<br>la noche están en la<br>galería de gente que<br>"
          "no vas a volver a ver<br>en meses.", "Es Nuestro Día", "tinta", "acuarela"),
     texto_color("Cómo lo resolvemos", "La página sigue ahí<br>cuando la boda<br>ya pasó",
