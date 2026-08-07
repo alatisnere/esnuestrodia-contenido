@@ -89,33 +89,38 @@ página → CTA por DM. Nunca precio, nunca país, nunca liga a la web.
 
 ---
 
-## Fotos: cuántas veces se ha usado cada una
+## Fotos: dónde está cada una
 
-| Foto | Usos |
-|---|---|
-| arcos-cantera | 2 |
-| azotea-urbana | 1 |
-| banquete-toldo | 0 |
-| calle-colonial | 2 |
-| cipreses-hacienda | 2 |
-| civil-terraza | 3 |
-| damas-vistiendo | 1 |
-| dia-jardin | 1 |
-| fiesta-noche | 1 |
-| frentes-buganvilia | 2 |
-| fuente-hacienda | 1 |
-| iglesia-vitral | 0 |
-| jardin-tropical | 1 |
-| manos-anillos | 1 |
-| mesa-banquete | 1 |
-| novio-espejo | 1 |
-| papeleria-mesa | 0 |
-| pareja-mayor-jardin | 0 |
-| playa-atardecer | 1 |
-| ramo-manos | 1 |
+| Foto | Ya publicada | En cola | Estado |
+|---|---|---|---|
+| arcos-cantera | 1 | 0 | en el feed |
+| azotea-urbana | 1 | 0 | en el feed |
+| banquete-toldo | 0 | 0 | — |
+| calle-colonial | 1 | 0 | en el feed |
+| cipreses-hacienda | 1 | 0 | en el feed |
+| civil-terraza | 2 | 0 | en el feed |
+| damas-vistiendo | 0 | 1 | en cola |
+| dia-jardin | 1 | 0 | en el feed |
+| fiesta-noche | 0 | 1 | en cola |
+| frentes-buganvilia | 1 | 0 | en el feed |
+| fuente-hacienda | 0 | 1 | en cola |
+| iglesia-vitral | 0 | 0 | — |
+| jardin-tropical | 1 | 0 | en el feed |
+| manos-anillos | 1 | 0 | en el feed |
+| mesa-banquete | 1 | 0 | en el feed |
+| novio-espejo | 2 | 0 | en el feed |
+| papeleria-mesa | 0 | 0 | — |
+| pareja-mayor-jardin | 0 | 1 | en cola |
+| playa-atardecer | 0 | 1 | en cola |
+| ramo-manos | 0 | 0 | — |
 
-Regla: ninguna foto se repite antes de tres publicaciones. Si todas pasan de
-**cuatro usos**, hay que generar fotos nuevas (ver README) o resolver la
+**Regla, y ahora la revisa el código:** ninguna foto que ya salió al feed vuelve a
+aparecer, ni de portada ni en el interior. `revisar_contra_el_feed()` en `base.py`
+compara las láminas contra el diccionario `YA_EN_EL_FEED` de `lote_agosto.py` y hace
+fallar la compilación si encuentra una repetida. Cuando publiques algo, agrega sus
+fotos a ese diccionario: es la única lista que manda.
+
+Cuando se acaben las libres hay que generar más (ver README) o resolver la
 publicación con láminas tipográficas.
 
 Las cuatro últimas se agregaron para romper la monotonía: el banco entero era
