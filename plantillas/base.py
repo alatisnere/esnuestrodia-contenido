@@ -696,6 +696,26 @@ class RegistroDePortadas:
         return p
 
 
+def revisar_contra_el_feed(laminas, nombre_post, ya_en_el_feed):
+    """Ninguna foto que ya salió al feed puede volver a aparecer.
+
+    El registro de portadas solo mira la lámina 1, porque es la que se ve en la
+    cuadrícula del perfil. Pero una foto repetida en el interior también se
+    nota: quien desliza dos publicaciones seguidas la reconoce. Aquí se revisan
+    todas las láminas, y `ya_en_el_feed` incluye las fotos de interior de lo ya
+    publicado, no solo las portadas.
+    """
+    repetidas = {}
+    for aqui in fotos_en(laminas):
+        for n in aqui:
+            if n in ya_en_el_feed:
+                repetidas[n] = ya_en_el_feed[n]
+    if repetidas:
+        detalle = "; ".join(f"«{n}» ya salió en {d}" for n, d in repetidas.items())
+        raise SystemExit(f"{nombre_post}: {detalle}. Elige otra foto.")
+    return True
+
+
 def revisar_repeticiones(laminas, nombre_post, max_por_publicacion=2):
     """Avisa si una misma foto aparece demasiadas veces dentro del carrusel."""
     cuenta = {}

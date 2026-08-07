@@ -22,18 +22,32 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from base import (portada_color, portada_tipografica, cierre_color, cta_dm_color, texto_color,
                   lista_color, muestras, banda, cita, dato, partido,
                   render, revisar, contraste_sobre_foto,
-                  RegistroDePortadas, revisar_repeticiones, portada_de)
+                  RegistroDePortadas, revisar_repeticiones, revisar_contra_el_feed,
+                  portada_de)
 
-# Fotos que ya abrieron una publicación en el feed. Ninguna nueva puede
-# repetirlas: en la cuadrícula del perfil se nota muchísimo.
+# TODAS las fotos que ya salieron al feed, no solo las de portada. Una foto
+# repetida en la portada se ve en la cuadrícula del perfil; una repetida en el
+# interior la reconoce igual quien desliza dos publicaciones seguidas. Aquí no
+# se distingue: si ya salió, no vuelve.
+#
+# Sale de leer las láminas de cada publicación ya subida, no de la memoria.
 YA_EN_EL_FEED = {
-    "arcos-cantera": "presentación (3 ago)",
+    "arcos-cantera": "la presentación (3 ago)",
+    "calle-colonial": "la presentación (3 ago)",
     "jardin-tropical": "el toldo (4 ago)",
+    "cipreses-hacienda": "el toldo (4 ago)",
     "civil-terraza": "la lista en cuatro lados (5 ago) y las mismas preguntas (6 ago)",
+    "frentes-buganvilia": "la lista en cuatro lados (5 ago)",
     "mesa-banquete": "los colores (6 ago)",
     "dia-jardin": "los colores (6 ago)",
 }
-PORTADAS = RegistroDePortadas(YA_EN_EL_FEED)
+# Solo portadas, para el aviso específico de la cuadrícula.
+PORTADAS = RegistroDePortadas({
+    "arcos-cantera": "la presentación (3 ago)",
+    "jardin-tropical": "el toldo (4 ago)",
+    "civil-terraza": "la lista en cuatro lados (5 ago) y las mismas preguntas (6 ago)",
+    "mesa-banquete": "los colores (6 ago)",
+})
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 LISTOS = RAIZ / "listos"
@@ -53,6 +67,7 @@ def post(archivo, tipo, titulo, prefijo, laminas, caption):
     if peor < 4.5:
         raise SystemExit(f"{prefijo}: contraste sobre foto insuficiente ({peor})")
     revisar_repeticiones(laminas, prefijo, max_por_publicacion=1)
+    revisar_contra_el_feed(laminas, prefijo, YA_EN_EL_FEED)
     PORTADAS.registrar(titulo, laminas)
     rutas = render(laminas, prefijo, LISTOS)
     datos = {"tipo": tipo, "titulo": titulo,
@@ -184,7 +199,7 @@ V2 = [
                 "italianas cierran entre tres y cuatro semanas en agosto. Un pedido "
                 "hecho a finales de julio se puede quedar esperando todo ese mes.",
                 "arena-media", "rayado"),
-    partido("cipreses-hacienda", "Lo que sí toma tiempo", "Dos o tres<br>pruebas, no una",
+    partido("azotea-urbana", "Lo que sí toma tiempo", "Dos o tres<br>pruebas, no una",
             "Un traje a la medida de verdad lleva dos o tres pruebas, de media hora a "
             "una hora cada una, repartidas entre las semanas de confección. Si te "
             "ofrecen una sola, probablemente es semimedida: también está bien, pero es "
@@ -228,7 +243,7 @@ Mándaselo al novio, que es al que se le va a olvidar.
 # ══════════════════════════ PROMOCIÓN 2 · Hotel ═════════════════════════
 # Firma: azul y hueso, puntos, foto apagada, banda de foto.
 P2 = [
-    portada_color("calle-colonial", "Invitados de fuera",
+    portada_color("fuente-hacienda", "Invitados de fuera",
                   "«¿Y dónde nos<br>quedamos?»",
                   "La pregunta que llega a las once de la noche.",
                   "Desliza", pos="center 40%", trato="apagado",
@@ -327,7 +342,7 @@ P3 = [
                 "ahí están.<br><br>Sirve para los que no pudieron ir, para los papás "
                 "que quieren enseñarlas y para ustedes dentro de diez años.",
                 "salvia", "acuarela"),
-    cta_dm_color("frentes-buganvilia", "No se acaba el día<br>de la boda.",
+    cta_dm_color("pareja-mayor-jardin", "No se acaba el día<br>de la boda.",
                  "La misma dirección que usaste para organizar todo se queda como el "
                  "lugar donde vive el recuerdo.", "boda",
                  pos="center 60%", trato="normal"),
