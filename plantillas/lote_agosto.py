@@ -21,7 +21,19 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from base import (portada_color, portada_tipografica, cierre_color, cta_dm_color, texto_color,
                   lista_color, muestras, banda, cita, dato, partido,
-                  render, revisar, contraste_sobre_foto)
+                  render, revisar, contraste_sobre_foto,
+                  RegistroDePortadas, revisar_repeticiones, portada_de)
+
+# Fotos que ya abrieron una publicación en el feed. Ninguna nueva puede
+# repetirlas: en la cuadrícula del perfil se nota muchísimo.
+YA_EN_EL_FEED = {
+    "arcos-cantera": "presentación (3 ago)",
+    "jardin-tropical": "el toldo (4 ago)",
+    "civil-terraza": "la lista en cuatro lados (5 ago) y las mismas preguntas (6 ago)",
+    "mesa-banquete": "los colores (6 ago)",
+    "dia-jardin": "los colores (6 ago)",
+}
+PORTADAS = RegistroDePortadas(YA_EN_EL_FEED)
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 LISTOS = RAIZ / "listos"
@@ -40,6 +52,8 @@ def post(archivo, tipo, titulo, prefijo, laminas, caption):
     peor = min((r for _, r in contraste_sobre_foto(laminas)), default=99)
     if peor < 4.5:
         raise SystemExit(f"{prefijo}: contraste sobre foto insuficiente ({peor})")
+    revisar_repeticiones(laminas, prefijo, max_por_publicacion=1)
+    PORTADAS.registrar(titulo, laminas)
     rutas = render(laminas, prefijo, LISTOS)
     datos = {"tipo": tipo, "titulo": titulo,
              "imagenes": [str(r.relative_to(RAIZ)) for r in rutas],
@@ -183,12 +197,12 @@ V2 = [
                  "Si algo se retrasa, ¿qué plan hay?",
                  "¿Los ajustes de última hora se cobran?"],
                 "cacao", "rayado"),
-    cierre_color("novio-espejo", "El traje no es<br>lo que se retrasa.<br>Es la tela.",
+    cierre_color("manos-anillos", "El traje no es<br>lo que se retrasa.<br>Es la tela.",
                  "Nadie se acuerda de esto hasta que faltan seis semanas y el sastre "
                  "dice que el corte viene en camino. Preguntarlo el primer día no "
                  "cuesta nada.",
                  "Mándaselo al novio, que se le va a olvidar",
-                 pos="center 70%", trato="apagado"),
+                 pos="center 40%", trato="apagado"),
 ]
 
 CAP_V2 = """Si el novio va a mandar a hacer su traje a la medida, empieza entre cuatro y seis meses antes de la boda. Y la primera pregunta al sastre no es el precio: es si la tela ya está en el taller o la tiene que traer.
@@ -219,21 +233,21 @@ P2 = [
                   "La pregunta que llega a las once de la noche.",
                   "Desliza", pos="center 40%", trato="apagado",
                   tinte_color="azul", op=.26),
-    banda("calle-colonial", "El problema", "El bloque de hotel<br>que nadie usó",
+    banda("playa-atardecer", "El problema", "El bloque de hotel<br>que nadie usó",
           "Apartaste habitaciones con tarifa especial, mandaste el código por WhatsApp "
           "y la mitad reservó por su cuenta más caro, porque para cuando fueron a "
           "reservar ya no encontraban el mensaje.",
-          "hueso", pos="center 65%", alto=520, trato="apagado", tex="puntos"),
+          "hueso", pos="center 40%", alto=520, trato="apagado", tex="puntos"),
     texto_color("Cómo lo resolvemos", "Los hoteles, con<br>su liga, en la página",
                 "Cada hotel con su precio, su distancia al salón y el botón para "
                 "reservar. El código de descuento ahí mismo, donde no se pierde."
                 "<br><br>Los que vienen de fuera entran una vez y resuelven todo: dónde "
                 "dormir, a qué hora llegar y qué ponerse.",
                 "azul", "puntos"),
-    cta_dm_color("calle-colonial", "Sobre todo si tu<br>boda es de destino.",
+    cta_dm_color("azotea-urbana", "Sobre todo si tu<br>boda es de destino.",
                  "Cuando la mitad de la lista viaja, la página deja de ser un lujo y se "
                  "vuelve lo que evita cincuenta llamadas.", "boda",
-                 pos="center 20%", trato="apagado", tinte_color="azul", op=.28),
+                 pos="center 35%", trato="apagado", tinte_color="azul", op=.28),
 ]
 
 CAP_P2 = """«Oigan, ¿y dónde nos quedamos?». La pregunta que siempre llega a las once de la noche.
@@ -271,12 +285,12 @@ V3 = [
                  "Dejarlos con alguien que no vaya a desaparecer",
                  "Suela lisa: pídele al salón que la raye o ponle cinta"],
                 "hueso", "puntos"),
-    cierre_color("fuente-hacienda", "La misma altura,<br>eso es lo clave.",
+    cierre_color("damas-vistiendo", "La misma altura,<br>eso es lo clave.",
                  "Si el segundo par es más bajo, el vestido arrastra y te lo vas a "
                  "pisar toda la noche. Si ya lo mandaste a bastillar, llévale los dos "
                  "pares a la costurera y que mida con el más alto.",
                  "Guárdalo para cuando compres el vestido",
-                 pos="center 15%", trato="calido", tinte_color="vino", op=.22),
+                 pos="center 35%", trato="calido", tinte_color="vino", op=.22),
 ]
 
 CAP_V3 = """Lleva dos pares de zapatos el día de tu boda. Los de las fotos y los de la fiesta.
@@ -333,10 +347,8 @@ Escríbenos «boda» por DM y te mandamos una de ejemplo para que la veas comple
 
 
 # ══════════════════════════════ construir ═══════════════════════════════
-post("010-valor-colores-de-temporada.json", "valor",
-     "Los colores que se están viendo este año", "valor-colores", V1, CAP_V1)
-post("011-promocion-mismas-preguntas.json", "promocion",
-     "Las mismas preguntas por WhatsApp", "promo-preguntas", P1, CAP_P1)
+# 010 (colores) y 011 (preguntas) ya salieron al feed el 6 de agosto; se quedan
+# arriba como referencia del formato pero ya no se vuelven a generar.
 post("012-valor-traje-a-la-medida.json", "valor",
      "Traje de novio a la medida: los tiempos", "valor-traje", V2, CAP_V2)
 post("013-promocion-bloque-de-hotel.json", "promocion",
@@ -348,3 +360,6 @@ post("015-promocion-galeria-despues.json", "promocion",
 
 for archivo, prefijo, n, largo, peor in POSTS:
     print(f"{archivo:44s} {prefijo:16s} {n} láminas  {largo:5d} car.  contraste {peor}")
+print("\nPortadas en uso:")
+for foto, donde in sorted(PORTADAS.usadas.items()):
+    print(f"  {foto:24s} {donde}")

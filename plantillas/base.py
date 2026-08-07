@@ -629,3 +629,80 @@ def portada_tipografica(rotulo, titulo, bajada, pie, fondo_color="vino", tex="ra
         '<div style="height:40px"></div>'
         f'<div style="font-family:UI;font-weight:500;font-size:32px;letter-spacing:.18em;'
         f'text-transform:uppercase;color:{kick}">{pie}</div></div>')
+
+
+# ══════════════════════════════════════════════════════════════════════
+# Control de repetición de fotos.
+#
+# En el feed se vio feo: dos publicaciones distintas abriendo con la misma
+# foto. Como las láminas ya llevan la imagen incrustada en base64, se puede
+# averiguar qué foto usa cada una sin que nadie tenga que declararlo a mano
+# —y por lo tanto sin que se pueda olvidar.
+# ══════════════════════════════════════════════════════════════════════
+
+def _firma(uri):
+    """Trozo del base64 tomado de la mitad del archivo.
+
+    El principio de dos JPEG es casi idéntico (cabecera y tablas), así que un
+    prefijo no distingue una foto de otra. A media imagen ya son datos de
+    píxel y sí son únicos.
+    """
+    medio = len(uri) // 2
+    return uri[medio:medio + 120]
+
+
+_INDICE = {_firma(uri): nombre for nombre, uri in FOTO.items()}
+assert len(_INDICE) == len(FOTO), "dos fotos comparten firma; alarga el trozo"
+
+
+def fotos_en(laminas):
+    """Qué fotos usa cada lámina, en orden. Devuelve lista de listas."""
+    salida = []
+    for lam in laminas:
+        aqui = []
+        for firma, nombre in _INDICE.items():
+            if firma in lam and nombre not in aqui:
+                aqui.append(nombre)
+        salida.append(aqui)
+    return salida
+
+
+def portada_de(laminas):
+    """La foto de la primera lámina, o None si la portada es tipográfica."""
+    primeras = fotos_en(laminas)[0]
+    return primeras[0] if primeras else None
+
+
+class RegistroDePortadas:
+    """Lleva la cuenta de qué foto abrió cada publicación.
+
+    Se inicializa con las que ya salieron al feed para que una publicación
+    nueva no repita la portada de una vieja.
+    """
+
+    def __init__(self, ya_publicadas=()):
+        self.usadas = dict(ya_publicadas)
+
+    def registrar(self, nombre_post, laminas):
+        p = portada_de(laminas)
+        if p is None:
+            return None          # portada tipográfica: no consume foto
+        if p in self.usadas:
+            raise SystemExit(
+                f"{nombre_post}: la portada «{p}» ya se usó en "
+                f"«{self.usadas[p]}». Elige otra o hazla tipográfica."
+            )
+        self.usadas[p] = nombre_post
+        return p
+
+
+def revisar_repeticiones(laminas, nombre_post, max_por_publicacion=2):
+    """Avisa si una misma foto aparece demasiadas veces dentro del carrusel."""
+    cuenta = {}
+    for aqui in fotos_en(laminas):
+        for n in aqui:
+            cuenta[n] = cuenta.get(n, 0) + 1
+    exceso = {n: c for n, c in cuenta.items() if c > max_por_publicacion}
+    if exceso:
+        raise SystemExit(f"{nombre_post}: fotos repetidas dentro del carrusel: {exceso}")
+    return cuenta
