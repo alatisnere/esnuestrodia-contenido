@@ -94,16 +94,24 @@ página → CTA por DM. Nunca precio, nunca país, nunca liga a la web.
 | Foto | Usos |
 |---|---|
 | arcos-cantera | 2 |
+| azotea-urbana | 1 |
+| banquete-toldo | 0 |
 | calle-colonial | 2 |
 | cipreses-hacienda | 2 |
-| civil-terraza | 2 |
+| civil-terraza | 3 |
+| damas-vistiendo | 1 |
 | dia-jardin | 1 |
 | fiesta-noche | 1 |
 | frentes-buganvilia | 2 |
-| fuente-hacienda | 2 |
+| fuente-hacienda | 1 |
+| iglesia-vitral | 0 |
 | jardin-tropical | 1 |
+| manos-anillos | 1 |
 | mesa-banquete | 1 |
 | novio-espejo | 1 |
+| papeleria-mesa | 0 |
+| pareja-mayor-jardin | 0 |
+| playa-atardecer | 1 |
 | ramo-manos | 1 |
 
 Regla: ninguna foto se repite antes de tres publicaciones. Si todas pasan de
@@ -116,3 +124,16 @@ frescos, `mesa-banquete` es un detalle sin gente, `novio-espejo` es interior de
 tonos fríos y `fiesta-noche` es la única nocturna. Cuando elijas foto para una
 publicación, fíjate en que no repita la *luz* de la anterior, no solo el
 archivo.
+
+### La regla que ahora vigila el código
+
+En el feed se vieron dos publicaciones distintas abriendo con la misma foto y se
+notó feísimo. Ya no puede volver a pasar sin que alguien lo vea: al generar, el
+script averigua qué foto usa cada lámina —la imagen va incrustada en el archivo,
+así que no hace falta que nadie lo declare— y revienta si:
+
+- una foto abre dos publicaciones distintas, contando las que ya salieron al feed
+- una foto aparece más de una vez dentro del mismo carrusel
+
+Si el build falla por esto, no lo saltes: elige otra foto o haz la portada
+tipográfica, que además rompe mejor la cuadrícula.
