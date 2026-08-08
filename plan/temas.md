@@ -95,7 +95,7 @@ página → CTA por DM. Nunca precio, nunca país, nunca liga a la web.
 |---|---|---|---|
 | arcos-cantera | 1 | 0 | en el feed |
 | azotea-urbana | 1 | 0 | en el feed |
-| banquete-toldo | 0 | 0 | — |
+| banquete-toldo | 1 | 0 | en el feed |
 | calle-colonial | 1 | 0 | en el feed |
 | cipreses-hacienda | 1 | 0 | en el feed |
 | civil-terraza | 2 | 0 | en el feed |
@@ -103,16 +103,16 @@ página → CTA por DM. Nunca precio, nunca país, nunca liga a la web.
 | dia-jardin | 1 | 0 | en el feed |
 | fiesta-noche | 0 | 1 | en cola |
 | frentes-buganvilia | 1 | 0 | en el feed |
-| fuente-hacienda | 0 | 1 | en cola |
-| iglesia-vitral | 0 | 0 | — |
+| fuente-hacienda | 1 | 0 | en el feed |
+| iglesia-vitral | 0 | 0 | **libre** |
 | jardin-tropical | 1 | 0 | en el feed |
 | manos-anillos | 1 | 0 | en el feed |
 | mesa-banquete | 1 | 0 | en el feed |
 | novio-espejo | 2 | 0 | en el feed |
-| papeleria-mesa | 0 | 0 | — |
+| papeleria-mesa | 0 | 0 | **libre** |
 | pareja-mayor-jardin | 0 | 1 | en cola |
-| playa-atardecer | 0 | 1 | en cola |
-| ramo-manos | 0 | 0 | — |
+| playa-atardecer | 1 | 0 | en el feed |
+| ramo-manos | 0 | 0 | **libre** |
 
 **Regla, y ahora la revisa el código:** ninguna foto que ya salió al feed vuelve a
 aparecer, ni de portada ni en el interior. `revisar_contra_el_feed()` en `base.py`
@@ -120,8 +120,9 @@ compara las láminas contra el diccionario `YA_EN_EL_FEED` de `lote_agosto.py` y
 fallar la compilación si encuentra una repetida. Cuando publiques algo, agrega sus
 fotos a ese diccionario: es la única lista que manda.
 
-Cuando se acaben las libres hay que generar más (ver README) o resolver la
-publicación con láminas tipográficas.
+Quedan **3 fotos libres**: iglesia-vitral, papeleria-mesa, ramo-manos. Con dos publicaciones en cola,
+la siguiente sesión de contenido ya tiene que traer fotos nuevas (ver README) o
+resolverse con láminas tipográficas.
 
 Las cuatro últimas se agregaron para romper la monotonía: el banco entero era
 luz dorada de tarde en hacienda. `dia-jardin` mete luz de mediodía y verdes
