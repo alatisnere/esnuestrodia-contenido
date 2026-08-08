@@ -40,6 +40,12 @@ YA_EN_EL_FEED = {
     "frentes-buganvilia": "la lista en cuatro lados (5 ago)",
     "mesa-banquete": "los colores (6 ago)",
     "dia-jardin": "los colores (6 ago)",
+    "novio-espejo": "el traje a la medida (7 ago)",
+    "azotea-urbana": "el traje a la medida (7 ago)",
+    "manos-anillos": "el traje a la medida (7 ago)",
+    "fuente-hacienda": "el bloque de hotel (7 ago)",
+    "playa-atardecer": "el bloque de hotel (7 ago)",
+    "banquete-toldo": "el bloque de hotel (7 ago)",
 }
 # Solo portadas, para el aviso específico de la cuadrícula.
 PORTADAS = RegistroDePortadas({
@@ -47,6 +53,8 @@ PORTADAS = RegistroDePortadas({
     "jardin-tropical": "el toldo (4 ago)",
     "civil-terraza": "la lista en cuatro lados (5 ago) y las mismas preguntas (6 ago)",
     "mesa-banquete": "los colores (6 ago)",
+    "novio-espejo": "el traje a la medida (7 ago)",
+    "fuente-hacienda": "el bloque de hotel (7 ago)",
 })
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
@@ -259,7 +267,7 @@ P2 = [
                 "<br><br>Los que vienen de fuera entran una vez y resuelven todo: dónde "
                 "dormir, a qué hora llegar y qué ponerse.",
                 "azul", "puntos"),
-    cta_dm_color("azotea-urbana", "Sobre todo si tu<br>boda es de destino.",
+    cta_dm_color("banquete-toldo", "Sobre todo si tu<br>boda es de destino.",
                  "Cuando la mitad de la lista viaja, la página deja de ser un lujo y se "
                  "vuelve lo que evita cincuenta llamadas.", "boda",
                  pos="center 35%", trato="apagado", tinte_color="azul", op=.28),
@@ -364,10 +372,12 @@ Escríbenos «boda» por DM y te mandamos una de ejemplo para que la veas comple
 # ══════════════════════════════ construir ═══════════════════════════════
 # 010 (colores) y 011 (preguntas) ya salieron al feed el 6 de agosto; se quedan
 # arriba como referencia del formato pero ya no se vuelven a generar.
-post("012-valor-traje-a-la-medida.json", "valor",
-     "Traje de novio a la medida: los tiempos", "valor-traje", V2, CAP_V2)
-post("013-promocion-bloque-de-hotel.json", "promocion",
-     "El bloque de hotel que nadie usó", "promo-hotel", P2, CAP_P2)
+# Publicado el 7 de agosto; sus fotos están en YA_EN_EL_FEED.
+# post("012-valor-traje-a-la-medida.json", "valor",
+#      "Traje de novio a la medida: los tiempos", "valor-traje", V2, CAP_V2)
+# Publicada el 7 de agosto; sus fotos están en YA_EN_EL_FEED.
+# post("013-promocion-bloque-de-hotel.json", "promocion",
+#      "El bloque de hotel que nadie usó", "promo-hotel", P2, CAP_P2)
 post("014-valor-dos-pares-de-zapatos.json", "valor",
      "Dos pares de zapatos", "valor-zapatos", V3, CAP_V3)
 post("015-promocion-galeria-despues.json", "promocion",
